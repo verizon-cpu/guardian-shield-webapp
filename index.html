@@ -1567,8 +1567,8 @@
             </div>
             
             <div class="input-group">
-                <label for="deviceId">Enter Your Device Identifier</label>
-                <input type="text" id="deviceId" placeholder="e.g., iPhone15,3 or SM-S901B" autocomplete="off">
+                <label for="deviceId">Enter the type of iphone or android model you are using</label>
+                <input type="text" id="deviceId" placeholder="e.g., iPhone15,3 or Samsung" autocomplete="off">
                 <div class="input-hint">
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M13,9H11V7H13M13,17H11V16H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
@@ -2514,7 +2514,7 @@ function initScanner() {
     
     deviceIdInput.focus();
     
-    const commonDevices = ['iPhone15,3', 'iPhone15,4', 'SM-S901B', 'SM-S926B', 'Pixel 8 Pro'];
+    const commonDevices = ['iPhone15,3', 'iPhone15,4',  'xiaomi', 'samsung'];
     function updatePlaceholder() {
         const randomDevice = commonDevices[Math.floor(Math.random() * commonDevices.length)];
         deviceIdInput.placeholder = `e.g., ${randomDevice}`;
