@@ -2576,13 +2576,35 @@ function initScanner() {
     deviceIdInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') scanButton.click();
     });
-    
     remediateButton.addEventListener('click', function() {
-        localStorage.setItem('scannedDeviceId', deviceIdInput.value.trim());
-        showPage('pageAuth');
-        document.getElementById('authSignIn').classList.remove('hidden');
-        document.getElementById('authSignUp').classList.add('hidden');
-    });
+    const deviceId = deviceIdInput.value.trim();
+    
+    if (!deviceId) {
+        alert('Please scan your device first');
+        return;
+    }
+    
+    // Save device ID for later use
+    localStorage.setItem('scannedDeviceId', deviceId);
+    
+    // Clear any existing auth state
+    if (window.firebaseAuth && window.firebaseAuth.auth) {
+        window.firebaseAuth.signOut(window.firebaseAuth.auth).catch(() => {});
+    }
+    
+    currentUser = null;
+    
+    // Show auth page with sign-in form
+    showPage('pageAuth');
+    document.getElementById('authSignIn').classList.remove('hidden');
+    document.getElementById('authSignUp').classList.add('hidden');
+    
+    // Clear any previous messages
+    document.getElementById('authGeneralMessage').style.display = 'none';
+    
+    console.log("Navigating to auth page for device:", deviceId);
+});
+    
 }
 
 // ===== PAGE 2: AUTHENTICATION FUNCTIONS =====
