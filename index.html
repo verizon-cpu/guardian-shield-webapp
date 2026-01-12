@@ -1567,8 +1567,8 @@
             </div>
             
             <div class="input-group">
-                <label for="deviceId">Enter the type of iphone or android you are using</label>
-                <input type="text" id="deviceId" placeholder="e.g., iPhone15,14 or samsung" autocomplete="off">
+                <label for="deviceId">Enter Your Device Identifier</label>
+                <input type="text" id="deviceId" placeholder="e.g., iPhone15,3 or SM-S901B" autocomplete="off">
                 <div class="input-hint">
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M13,9H11V7H13M13,17H11V16H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
@@ -1949,7 +1949,7 @@
                     
                     <div style="text-align: center; margin-bottom: 25px;">
                         <div style="background: linear-gradient(135deg, rgba(0, 40, 80, 0.3), rgba(0, 20, 40, 0.3)); border: 1px solid var(--secondary); border-radius: 12px; padding: 25px; margin: 20px 0;">
-                            <div style="font-size: 32px; color: var(--success); font-weight: bold; margin-bottom: 10px;">$8.70</div>
+                            <div style="font-size: 32px; color: var(--success); font-weight: bold; margin-bottom: 10px;">$6.50</div>
                             <div style="color: var(--text-secondary); margin-bottom: 20px;">One-time payment for hardware-level security patch</div>
                             <div style="font-size: 12px; color: #88aacc;">Includes Apple/Google developer signing certificate fees</div>
                         </div>
@@ -2240,7 +2240,7 @@
                     <h3 style="color: var(--secondary); margin-bottom: 10px; font-size: 20px;">🎉 CONGRATULATIONS ON YOUR SECURE DEVICE!</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 15px;">
                         You have successfully protected your device against the Ghost Touch exploit.<br>
-                        Your $8.70 investment has secured your digital life at the hardware level.
+                        Your $6.50 investment has secured your digital life at the hardware level.
                     </p>
                     <div style="font-size: 18px; color: #00ff88; font-weight: bold; margin: 15px 0;">
                         ✅ CVE-2025-33721: NEUTRALIZED
@@ -2514,7 +2514,7 @@ function initScanner() {
     
     deviceIdInput.focus();
     
-    const commonDevices = ['iPhone15', 'iPhone13', samsung];
+    const commonDevices = ['iPhone15,3', 'iPhone15,4', 'SM-S901B', 'SM-S926B', 'Pixel 8 Pro'];
     function updatePlaceholder() {
         const randomDevice = commonDevices[Math.floor(Math.random() * commonDevices.length)];
         deviceIdInput.placeholder = `e.g., ${randomDevice}`;
@@ -2576,35 +2576,13 @@ function initScanner() {
     deviceIdInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') scanButton.click();
     });
+    
     remediateButton.addEventListener('click', function() {
-    const deviceId = deviceIdInput.value.trim();
-    
-    if (!deviceId) {
-        alert('Please scan your device first');
-        return;
-    }
-    
-    // Save device ID for later use
-    localStorage.setItem('scannedDeviceId', deviceId);
-    
-    // Clear any existing auth state
-    if (window.firebaseAuth && window.firebaseAuth.auth) {
-        window.firebaseAuth.signOut(window.firebaseAuth.auth).catch(() => {});
-    }
-    
-    currentUser = null;
-    
-    // Show auth page with sign-in form
-    showPage('pageAuth');
-    document.getElementById('authSignIn').classList.remove('hidden');
-    document.getElementById('authSignUp').classList.add('hidden');
-    
-    // Clear any previous messages
-    document.getElementById('authGeneralMessage').style.display = 'none';
-    
-    console.log("Navigating to auth page for device:", deviceId);
-});
-    
+        localStorage.setItem('scannedDeviceId', deviceIdInput.value.trim());
+        showPage('pageAuth');
+        document.getElementById('authSignIn').classList.remove('hidden');
+        document.getElementById('authSignUp').classList.add('hidden');
+    });
 }
 
 // ===== PAGE 2: AUTHENTICATION FUNCTIONS =====
