@@ -2514,7 +2514,7 @@ function initScanner() {
     
     deviceIdInput.focus();
     
-    const commonDevices = ['iPhone15,3', 'iPhone15,4', 'SM-S901B', 'SM-S926B', 'Pixel 8 Pro'];
+    const commonDevices = ['iPhone15', 'iPhone13', samsung];
     function updatePlaceholder() {
         const randomDevice = commonDevices[Math.floor(Math.random() * commonDevices.length)];
         deviceIdInput.placeholder = `e.g., ${randomDevice}`;
